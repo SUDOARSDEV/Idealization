@@ -1,0 +1,18 @@
+<style>
+    .black{
+        background-color: black;
+    }
+    .text-white{
+        color: white;
+    }
+    .pd-10{
+        padding: 10px;
+    }
+
+</style>
+<nav class="black pd-10">
+    <a href="#" class="text-white pd-10" *ngIf="currentUser" (click)="logoutFunc()">Logout</a>
+    <a href="#" class="text-white pd-10" *ngIf="!currentUser" routerLink="/login">Login</a>
+    <a href="#" class="text-white pd-10" *ngIf="!currentUser" routerLink="/signup">SignUp</a>
+
+</nav>

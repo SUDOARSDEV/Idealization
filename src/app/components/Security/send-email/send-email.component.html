@@ -1,0 +1,17 @@
+<form name="sendEmailForm" (submit)="sendEmail(userEmail)" #sendEmailForm="ngForm">
+    <div class="input-field">
+        <input id="email" type="email" [(ngModel)]="userEmail" class="validate" name="email"
+            #email="ngModel" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+            placeholder="E-mail address">
+        <div class="error-block" *ngIf="email.errors && (email.dirty || email.touched)">
+            <p *ngIf="email.errors?.required" class="white-text">Email required</p>
+            <p *ngIf="email.errors?.pattern" class="white-text">Email is not valid</p>
+        </div>
+    </div>
+    <div class="footer text-center">
+        <button type="submit"
+            class="btn-codex btn-medico medico-green">Send </button> <br>
+
+        <a [routerLink]="['/login']" class="btn-medico medico-blue">Sign In</a>
+    </div>
+</form>

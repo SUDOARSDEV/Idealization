@@ -1,0 +1,68 @@
+  <div class="container-fluid">
+    <div class="row login-container">
+      <div class="col s12">
+        <div class="authentication-form" id="login">
+          <div class="logo">
+            <!-- <img src="../../../assets/livefreelogo.png" alt="logo" width="200"> -->
+          </div>
+          <h3 class="center">Sign In (Login)</h3>
+          <form id="form" name="loginform" [formGroup]="loginform">
+            <div class="input-field">
+              <input name="email" formControlName="email" id="email" type="email"
+                class="validate black-text" autocomplete="off" required placeholder="E-mail address" />
+              <p class="red-text" *ngIf="
+                            loginform.controls['email'].hasError('required') &&
+                            loginform.controls['email'].touched
+                          ">
+                Email required
+              </p>
+              <p class="red-text" *ngIf="
+                            loginform.controls['email'].hasError('pattern') &&
+                            loginform.controls['email'].touched
+                          ">
+                Enter valid Email
+              </p>
+            </div>
+            <div class="input-field">
+              <input name="password" formControlName="password" id="password" type="password"
+                class="validate black-text" required placeholder="Password" />
+              <p class="red-text" *ngIf="
+                            loginform.controls['password'].hasError('required') &&
+                            loginform.controls['password'].touched
+                          ">
+                Password required
+              </p>
+            </div>
+            <div class="row mb-3">
+              <div class="col s12">
+                <div class="forgot-link"><a [routerLink]="['/forgetpassword/sendemail']">Forgot Password ?</a></div>
+              </div>
+            </div>
+            <div class="footer text-center">
+              <a [routerLink]="['/signup']" class="btn-medico medico-blue">Register</a>
+              <button (click)="verify(loginform.value.email,loginform.value.password)"
+                [disabled]="!loginform.valid || loading == true" type="submit" class="btn-medico medico-green">
+                Sign In
+                <span class="rotate-spinner" *ngIf="loading == true"><i class="icofont-spinner"></i></span>
+              </button>
+            </div>
+            <div class="row" *ngIf="responseStatus.statusText == 'UNAUTHORIZED'">
+              <p class="red-text margin-0px font-size_13px center">
+                {{ responseStatus.error.Error }}
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+

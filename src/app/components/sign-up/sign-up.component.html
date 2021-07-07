@@ -1,0 +1,71 @@
+
+
+  <div class="container-fluid">
+    <div class="row login-container">
+      <div class="col s12">
+        <div class="authentication-form" id="login">
+          <div class="logo">
+            <!-- <img src="../../../assets/livefreelogo.png" alt="logo" width="200"> -->
+          </div>
+          <h3 class="center">Create an Account</h3>
+          <form id="form" name="registerForm" [formGroup]="registerForm">
+            <div class="input-field">
+              <input id="email" formControlName="email" name="email" type="email"
+                class="validate" required autocomplete="off" placeholder="Email address" />
+              <p class="red-text" *ngIf="
+                              registerForm.controls['email'].hasError('required') &&
+                              registerForm.controls['email'].touched
+                            ">
+                Email required
+              </p>
+              <p class="red-text" *ngIf="
+                              registerForm.controls['email'].hasError('pattern') &&
+                              registerForm.controls['email'].touched
+                            ">
+                Enter valid Email
+              </p>
+            </div>
+            <div class="input-field">
+              <input id="password" formControlName="password" name="password" type="password"
+                class="validate" ng-minlength="6" required placeholder="Password" />
+              <p class="red-text" *ngIf="
+                              registerForm.controls['password'].hasError(
+                                'required'
+                              ) && registerForm.controls['password'].touched
+                            ">
+                Password required
+              </p>
+            </div>
+            <div class="footer text-center">
+              <a [routerLink]="['/login']" class="btn-medico medico-blue">Sign In</a>
+              <button (click)="register(registerForm.value)" [disabled]="!registerForm.valid || loading == true"
+                type="submit" class="btn-medico medico-green">Sign Up <span class="rotate-spinner"
+                  *ngIf="loading == true"><i class="icofont-spinner"></i></span></button>
+            </div>
+            <div class="row" *ngIf="responseStatus.status == true">
+              <p class="red-text margin-0px font-size_13px center">
+                {{ responseStatus.msg }}
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
