@@ -1,17 +1,19 @@
-<form name="sendEmailForm" (submit)="sendEmail(userEmail)" #sendEmailForm="ngForm">
-    <div class="input-field">
-        <input id="email" type="email" [(ngModel)]="userEmail" class="validate" name="email"
-            #email="ngModel" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
-            placeholder="E-mail address">
-        <div class="error-block" *ngIf="email.errors && (email.dirty || email.touched)">
-            <p *ngIf="email.errors?.required" class="white-text">Email required</p>
-            <p *ngIf="email.errors?.pattern" class="white-text">Email is not valid</p>
+<div class="container">
+    <div class="row" style="padding-top: 10%;">
+      <div class="col-12 d-flex justify-content-center align-items-center">
+        <div class="card" style="width: 20rem;height: 200px;">
+          <div class="card-body">
+            <h5 class="card-title text-center">Password Recovery</h5>
+            <h6 class="card-subtitle mb-4 text-muted text-center">Enter Your Email Address</h6>
+            <div class="card-text text-center">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping">@</span>
+                    <input type="text" [(ngModel)]="userEmail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="addon-wrapping">
+                    <button type="button" class="btn btn-outline-info" (click)="sendEmail(userEmail)">Send</button>
+                </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="footer text-center">
-        <button type="submit"
-            class="btn-codex btn-medico medico-green">Send </button> <br>
-
-        <a [routerLink]="['/login']" class="btn-medico medico-blue">Sign In</a>
-    </div>
-</form>
+  </div>

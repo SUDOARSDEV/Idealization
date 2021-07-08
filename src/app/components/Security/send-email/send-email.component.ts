@@ -17,7 +17,7 @@ export class SendEmailComponent implements OnInit {
 
   sendEmail(email:any){
     console.log(email);
-    let data = { email: email};
+    let data = { email: email };
     console.log(data);
     this.apirequest.sendUserEmail(data).subscribe(data => {
       console.log(data);
