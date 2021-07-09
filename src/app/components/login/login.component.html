@@ -1,33 +1,33 @@
   <div class="container">
     <div class="row" style="padding-top: 10%;">
       <div class="col-12 d-flex justify-content-center align-items-center">
-        <div class="card" style="width: 20rem;height: 300px;">
+        <div class="card" style="width: 20rem;height: 350px;">
           <div class="card-body">
             <h5 class="card-title text-center">SignIn</h5>
             <h6 class="card-subtitle mb-2 text-muted text-center">To Your Account</h6>
             <div class="card-text">
               <form id="form" name="loginform" [formGroup]="loginform">
-                <div class="input-group flex-nowrap">
+                <div class="input-group flex-nowrap mb-4">
                   <span class="input-group-text" id="addon-wrapping">@</span>
                   <input type="text" formControlName="email"  class="form-control" placeholder="Email" aria-label="Email" aria-describedby="addon-wrapping">
-                  <p class="red-text" 
+                  <p class="text-danger error mx-5" 
                      *ngIf="loginform.controls['email'].hasError('required') && loginform.controls['email'].touched">
                     Email required
                   </p>
-                  <p class="red-text" 
+                  <p class="text-danger error mx-5" 
                      *ngIf="loginform.controls['email'].hasError('pattern') && loginform.controls['email'].touched">
                     Enter valid Email
                   </p>
                 </div>
-                <div class="input-group flex-nowrap mt-2">
+                <div class="input-group flex-nowrap mt-4">
                   <span class="input-group-text" id="addon-wrapping">**</span>
                   <input type="password" class="form-control" formControlName="password" placeholder="Password" aria-label="Password" aria-describedby="addon-wrapping">
-                  <p class="red-text" 
+                  <p class="text-danger error mx-5" 
                      *ngIf="loginform.controls['password'].hasError('required') && loginform.controls['password'].touched">
                     Password required
                   </p>
                 </div>
-                <div class="row mt-2">
+                <div class="row mt-4">
                   <div class="col-12 text-center">
                     <button class="btn btn-dark" type="button"   style="width: 150px;"
                             (click)="verify(loginform.value.email,loginform.value.password)"
@@ -43,10 +43,10 @@
                     <a [routerLink]="['/forgetpassword/sendemail']">Forgot Password ?</a>
                   </div>
                 </div>
-                <div class="row" *ngIf="responseStatus.statusText == 'UNAUTHORIZED'">
-                  <p class="red-text margin-0px font-size_13px center">
-                    {{ responseStatus.error.Error }}
-                  </p>
+                <div class="row" *ngIf="currentUser.status == false">
+                  <div class="alert alert-danger mt-3 pt-1 pb-1 text-center" role="alert">
+                    {{ currentUser.message }}
+                  </div>
                 </div>
               </form>
             </div>

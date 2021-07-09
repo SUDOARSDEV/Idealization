@@ -34,7 +34,7 @@ export class ResetPasswordComponent implements OnInit {
       email : this.email,
       newpassword : value.password
     }
-    this.apirequest.ResetPassword(data).subscribe(data => {
+    this.apirequest.postAPI('users/resetPassword',data).subscribe(data => {
       console.log(data);
     });
   }

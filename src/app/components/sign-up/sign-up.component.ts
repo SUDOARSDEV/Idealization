@@ -97,7 +97,7 @@ export class SignUpComponent implements OnInit {
       console.log(res);
       if (res === true) {
 
-        this.apirequest.getUserDetails().subscribe((data) => {
+        this.apirequest.getAPI('users/info').subscribe((data) => {
           this.loading = false;
           this.currentUser = data;
           HeaderComponent.updateCurrentUser.next(true);

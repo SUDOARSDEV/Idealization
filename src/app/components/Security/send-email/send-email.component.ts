@@ -19,7 +19,7 @@ export class SendEmailComponent implements OnInit {
     console.log(email);
     let data = { email: email };
     console.log(data);
-    this.apirequest.sendUserEmail(data).subscribe(data => {
+    this.apirequest.postAPI('users/sendEmail',data).subscribe(data => {
       console.log(data);
     });
     

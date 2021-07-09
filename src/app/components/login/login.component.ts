@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
 
   loginform = new FormGroup({email:new FormControl(),password: new FormControl()});
   currentUser: any = {};
-  responseStatus: any = {};
   loading: boolean = false;
 
   constructor(
@@ -54,10 +53,10 @@ export class LoginComponent implements OnInit {
       'password': ['', Validators.required]
     });
   }
+  
   verify(email:any, password:any) {
 
     this.loading = true;
-    this.responseStatus = {};
     console.log(email, password);
 
     this.authenticationService.login(email, password)
@@ -66,12 +65,11 @@ export class LoginComponent implements OnInit {
           console.log(result);
           if (result === true) {
             //login successful
-            this.apirequest.getUserDetails().subscribe(data => {
+            this.apirequest.getAPI('users/info').subscribe(data => {
               this.currentUser = data;
               console.log(this.currentUser);
               this.loading = false;
               if (this.currentUser.status == 1) {
-                // $('#Loginmodal').modal('close');
                 localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
                 HeaderComponent.updateCurrentUser.next(true);
                 this.router.navigate(['/user/dashboard']);
@@ -88,8 +86,8 @@ export class LoginComponent implements OnInit {
           }
         }, error => {
           this.loading = false;
-          this.responseStatus = error;
-          console.log(this.responseStatus.error);
+          this.currentUser = error.error;
+          console.log(this.currentUser);
         });
   }
 

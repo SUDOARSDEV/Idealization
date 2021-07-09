@@ -22,7 +22,7 @@ export class VerificationComponent implements OnInit {
     let data = { userId: this.email};
     console.log(data);
     
-    this.apirequest.getUserVerify(data).subscribe(data => {
+    this.apirequest.postAPI('users/verify',data).subscribe(data => {
       console.log(data);
     });
   }

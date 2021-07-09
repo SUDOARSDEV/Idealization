@@ -16,16 +16,16 @@ export class HomeComponent implements OnInit {
     this.getCoursesList();
   }
 
-  getCoursesList(){
-    this.apirequest.getCourses().subscribe(res => {
+  getCoursesList(){ 
+    this.apirequest.getAPI('courses').subscribe(res => {
         console.log(res);
         this.CourseList = res;
         console.log(this.CourseList.courses);
         
-    },error => {
+    }, error => {
      console.log(error);
-     
-    });
+     this.CourseList = 'error';
+    }); 
   }
 
 }
