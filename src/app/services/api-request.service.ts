@@ -24,7 +24,7 @@ export class ApiRequestService {
 
   }
 
-  getData() {
+  getCourses() {
     return this.http.get(`${this.BASE_URL}courses`).pipe(
       map(response => {
         return response;

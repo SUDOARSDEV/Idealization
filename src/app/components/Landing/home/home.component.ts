@@ -8,18 +8,24 @@ import { ApiRequestService } from 'src/app/services/api-request.service';
 })
 export class HomeComponent implements OnInit {
 
+  CourseList:any;
+
   constructor(private apirequest: ApiRequestService) { }
 
   ngOnInit(): void {
+    this.getCoursesList();
+  }
 
-  //   this.apirequest.getData().subscribe(res => {
-  //   console.log("asd");
-    
-  //     console.log(res);
-  // },error => {
-  //  console.log(error);
-   
-  // });
+  getCoursesList(){
+    this.apirequest.getCourses().subscribe(res => {
+        console.log(res);
+        this.CourseList = res;
+        console.log(this.CourseList.courses);
+        
+    },error => {
+     console.log(error);
+     
+    });
   }
 
 }

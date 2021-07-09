@@ -9,6 +9,18 @@
             <div class="card-text">
               <form id="form" name="registerForm" [formGroup]="registerForm">
                 <div class="input-group flex-nowrap">
+                  <span class="input-group-text" id="addon-wrapping">$..</span>
+                  <input type="text" formControlName="username"  class="form-control" placeholder="Username" aria-label="username" aria-describedby="addon-wrapping">
+                  <p class="red-text" 
+                     *ngIf="registerForm.controls['username'].hasError('required') && registerForm.controls['username'].touched">
+                    username required
+                  </p>
+                  <p class="red-text" 
+                     *ngIf="registerForm.controls['username'].hasError('pattern') && registerForm.controls['username'].touched">
+                    Enter valid username
+                  </p>
+                </div>
+                <div class="input-group flex-nowrap mt-2">
                   <span class="input-group-text" id="addon-wrapping">@</span>
                   <input type="text" formControlName="email"  class="form-control" placeholder="Email" aria-label="Email" aria-describedby="addon-wrapping">
                   <p class="red-text" 
@@ -38,10 +50,13 @@
                     </button>
                   </div>
                 </div>
-                <div class="row" *ngIf="responseStatus.statusText == 'UNAUTHORIZED'">
-                  <p class="red-text margin-0px font-size_13px center">
-                    {{ responseStatus.error.Error }}
-                  </p>
+                <div class="row px-2 pt-2">
+                  <div class="alert alert-success pt-1 pb-1 text-center" role="alert" *ngIf="currentUser?.status == true">
+                    {{currentUser?.message}}
+                  </div>
+                  <div class="alert alert-danger pt-1 pb-1 text-center" role="alert" *ngIf="currentUser?.status == false">
+                    {{currentUser?.message}}
+                  </div>
                 </div>
               </form>
             </div>

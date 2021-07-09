@@ -16,8 +16,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class SignUpComponent implements OnInit {
 
-  registerForm = new FormGroup({email:new FormControl(),password: new FormControl()});
-  responseStatus: any = {};
+  registerForm = new FormGroup({email:new FormControl(),password: new FormControl(),username: new FormControl()});
   loading: boolean = false;
   currentUser: any = {};
 
@@ -54,7 +53,8 @@ export class SignUpComponent implements OnInit {
   CreateRegisterForm() {
     this.registerForm = this.fb.group({
       'email': ['', Validators.compose([Validators.required, Validators.pattern(AppConfig.emailPattern)])],
-      'password': ['', Validators.required]
+      'password': ['', Validators.required],
+      'username': ['', Validators.required]
     },
     // {validator: PasswordValidation.MatchPassword }
     );
@@ -67,23 +67,20 @@ export class SignUpComponent implements OnInit {
     // formValue.company = "Codex";
     // formValue.country = "Pakistan";
     console.log(formValue);
-    this.responseStatus = {};
     this.loading = true;
     this.authenticationService.registerUser(formValue).subscribe((res) => {
 
       console.log(res);
       this.loading = false;
-      if (res.status == 'True') {
-        this.responseStatus.status = true;
-        this.responseStatus.message = "Successfully registered";
+      if (res.status == true) {
+        this.currentUser = res;
         //this.verify(formValue.email, formValue.password);
         // this.msg_view(res.msg);
         this.CreateRegisterForm();
         // this.router.navigate(['/welcome']);
       }
-      else if (res.status == 'False') {
-        this.responseStatus.status = true;
-        this.responseStatus.msg = "Email or username already registered";
+      else if (res.status == false) {
+        this.currentUser = res;
         // this.msg_view(res.msg);
       }
 
@@ -94,7 +91,6 @@ export class SignUpComponent implements OnInit {
   verify(email:any, password:any) {
 
     this.loading = true;
-    this.responseStatus = {};
     console.log(email, password);
     this.authenticationService.login(email, password).subscribe((res) => {
       this.loading = false;
@@ -114,8 +110,6 @@ export class SignUpComponent implements OnInit {
       }
     }, (err) => {
       this.loading = false;
-      this.responseStatus.status = err.statusText;
-      this.responseStatus.msg = "Invalid username or password";
       console.log(err);
     });
   }
