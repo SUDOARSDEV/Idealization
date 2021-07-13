@@ -3,6 +3,7 @@ import { Subject } from "rxjs";
 import { AuthenticationService } from "../../../services/authentication.service";
 import { Router } from "@angular/router";
 import { CookieService } from "ngx-cookie";
+import { Globallist } from 'src/app/utilities/globallist';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,7 @@ export class HeaderComponent implements OnInit {
   public static updateCurrentUser : Subject<boolean> = new Subject();
   userStatus : boolean = false;
   currentUser : any = {};
+  glist: Globallist = new Globallist();
 
   constructor(private authenticationService : AuthenticationService, private router : Router, private _cookieService: CookieService) { }
 
@@ -25,10 +27,9 @@ export class HeaderComponent implements OnInit {
   Headerpasser()
   {
     HeaderComponent.updateCurrentUser.subscribe((res) => {
-      console.log(res);
+      this.glist.printInfo(res);
       this.userStatus = res;
-      let data:any = localStorage.getItem('currentUser');
-      this.currentUser = JSON.parse(data);
+      this.currentUser = this.glist.getUserinfo();
 
     }, err => {
 
@@ -40,8 +41,7 @@ export class HeaderComponent implements OnInit {
       // console.log(access_token);
       
         if (access_token) {
-          let data:any = localStorage.getItem('currentUser');
-          this.currentUser = JSON.parse(data);
+          this.currentUser = this.glist.getUserinfo();
         } else {
           localStorage.clear();
           this.currentUser = undefined;

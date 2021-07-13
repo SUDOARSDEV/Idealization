@@ -1,1 +1,36 @@
-<p>dashboard works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-4 offset-4 mt-5">
+            <div class="card text-dark bg-light mb-3 position-relative" *ngIf="UserLog?.status ===  0">
+                <div class="card-header">
+                    Hi, {{UserLog?.username}}
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">
+                      User Status Not Verify
+                  </h5>
+                  <p class="card-text">{{UserLog?.username}}, Please Check Your Email Address {{UserLog?.email}}</p>
+                </div>
+                <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                    <span class="visually-hidden">New alerts</span>
+                  </span>
+            </div>
+            <div class="card text-dark bg-light mb-3 position-relative" *ngIf="UserLog?.status ===  1">
+                <div class="card-header">
+                    Hi, {{UserLog?.username}}
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">
+                      User Status Approved
+                  </h5>
+                  <p class="card-text text-center">
+                    <button routerLink="/user/profile" type="button" class="btn btn-outline-primary">Profile</button>
+                  </p>
+                </div>
+                <span class="position-absolute top-0 start-100 translate-middle p-2 bg-success border border-light rounded-circle">
+                    <span class="visually-hidden">New alerts</span>
+                  </span>
+            </div>
+        </div>
+    </div>
+</div>

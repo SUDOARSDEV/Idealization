@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Globallist } from 'src/app/utilities/globallist';
 import { ApiRequestService } from "../../../services/api-request.service";
 
 @Component({
@@ -9,6 +10,8 @@ import { ApiRequestService } from "../../../services/api-request.service";
 export class SendEmailComponent implements OnInit {
 
   userEmail : string = "";
+  email_data: any;
+  glist: Globallist = new Globallist();
 
   constructor(private apirequest: ApiRequestService) { }
 
@@ -16,11 +19,11 @@ export class SendEmailComponent implements OnInit {
   }
 
   sendEmail(email:any){
-    console.log(email);
+    this.glist.printInfo(email);
     let data = { email: email };
-    console.log(data);
-    this.apirequest.postAPI('users/sendEmail',data).subscribe(data => {
-      console.log(data);
+    this.apirequest.postAPI('users/sendEmail',data).subscribe(res => {
+      this.glist.printInfo(res);
+      this.email_data = res;
     });
     
   }

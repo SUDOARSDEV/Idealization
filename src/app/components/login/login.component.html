@@ -44,8 +44,11 @@
                   </div>
                 </div>
                 <div class="row" *ngIf="currentUser.status == false">
-                  <div class="alert alert-danger mt-3 pt-1 pb-1 text-center" role="alert">
-                    {{ currentUser.message }}
+                  <div class="alert alert-danger mt-3 pt-1 pb-1 text-center" role="alert" *ngIf="currentUser.error == undefined">
+                    {{ currentUser?.message }}
+                  </div>
+                  <div class="alert alert-danger mt-3 pt-1 pb-1 text-center" role="alert" *ngIf="currentUser.error != undefined">
+                    {{ currentUser?.error?.message }}
                   </div>
                 </div>
               </form>

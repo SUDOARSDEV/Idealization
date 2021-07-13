@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { HeaderComponent } from '../Includes/header/header.component';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { PasswordValidation } from "../../utilities/PasswordValidation";
 import { AppConfig } from "../../utilities/app-config";
 import { AuthenticationService } from "../../services/authentication.service";
-import { ApiRequestService } from "../../services/api-request.service";
 import { CookieService } from "ngx-cookie";
 import { Router } from "@angular/router";
 import { AuthService } from '../../services/auth.service';
+import { Globallist } from 'src/app/utilities/globallist';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,12 +17,12 @@ export class SignUpComponent implements OnInit {
   registerForm = new FormGroup({email:new FormControl(),password: new FormControl(),username: new FormControl()});
   loading: boolean = false;
   currentUser: any = {};
+  glist: Globallist = new Globallist();
 
   constructor(
     private fb: FormBuilder,
     private authenticationService: AuthenticationService,
     private _cookieService: CookieService,
-    private apirequest: ApiRequestService,
     private router: Router,
     private authservice: AuthService, 
     ) 
@@ -35,16 +33,15 @@ export class SignUpComponent implements OnInit {
     let access_token = this._cookieService.get('token');
     if (access_token) {
       // console.log(access_token);
-      console.log(this.authservice.isAuthenticated());
+      this.glist.printInfo(this.authservice.isAuthenticated());
       if (this.authservice.isAuthenticated()) {
-        console.log("logout out, redirecting to login");
+        this.glist.printInfo("logout out, redirecting to login");
         this.authenticationService.logout();
         this.router.navigate(['/welcome']);
       }
       else {
-        console.log("redirecting");
+        this.glist.printInfo("redirecting");
         this.router.navigate(['/user/dashboard']);
-
       }
 
     }
@@ -66,11 +63,11 @@ export class SignUpComponent implements OnInit {
     // formValue.phone = "Unknown";
     // formValue.company = "Codex";
     // formValue.country = "Pakistan";
-    console.log(formValue);
+    this.glist.printInfo(formValue);
     this.loading = true;
     this.authenticationService.registerUser(formValue).subscribe((res) => {
 
-      console.log(res);
+      this.glist.printInfo(res);
       this.loading = false;
       if (res.status == true) {
         this.currentUser = res;
@@ -86,32 +83,6 @@ export class SignUpComponent implements OnInit {
 
     });
 
-  }
-
-  verify(email:any, password:any) {
-
-    this.loading = true;
-    console.log(email, password);
-    this.authenticationService.login(email, password).subscribe((res) => {
-      this.loading = false;
-      console.log(res);
-      if (res === true) {
-
-        this.apirequest.getAPI('users/info').subscribe((data) => {
-          this.loading = false;
-          this.currentUser = data;
-          HeaderComponent.updateCurrentUser.next(true);
-          //location.reload();
-          this.router.navigate(['/user/dashboard']);
-
-
-        });
-
-      }
-    }, (err) => {
-      this.loading = false;
-      console.log(err);
-    });
   }
 
 }

@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthenticationService {
 
+  
   baseUrl: string = environment.BASE_URL;
   requestHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient, private _cookieService: CookieService) { }

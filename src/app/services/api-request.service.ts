@@ -31,9 +31,7 @@ export class ApiRequestService {
 
   postAPI(RouteName:any,Data:any) {
     return this.http.post(`${this.BASE_URL}${RouteName}`, Data).pipe(
-      map(response => {
-        console.log(response);
-        
+      map(response => {        
         return response;
       })
     );

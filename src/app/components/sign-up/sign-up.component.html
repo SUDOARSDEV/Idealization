@@ -2,45 +2,45 @@
   <div class="container">
     <div class="row" style="padding-top: 10%;">
       <div class="col-12 d-flex justify-content-center align-items-center">
-        <div class="card" style="width: 20rem;height: 300px;">
+        <div class="card" style="width: 20rem;height: 350px;">
           <div class="card-body">
             <h5 class="card-title text-center">Register</h5>
             <h6 class="card-subtitle mb-2 text-muted text-center">Create An Account</h6>
             <div class="card-text">
               <form id="form" name="registerForm" [formGroup]="registerForm">
-                <div class="input-group flex-nowrap">
+                <div class="input-group flex-nowrap mb-4">
                   <span class="input-group-text" id="addon-wrapping">$..</span>
                   <input type="text" formControlName="username"  class="form-control" placeholder="Username" aria-label="username" aria-describedby="addon-wrapping">
-                  <p class="red-text" 
-                     *ngIf="registerForm.controls['username'].hasError('required') && registerForm.controls['username'].touched">
-                    username required
+                  <p class="text-danger error mx-5" 
+                  *ngIf="registerForm.controls['username'].hasError('required') && registerForm.controls['username'].touched">
+                    Username Required
                   </p>
-                  <p class="red-text" 
-                     *ngIf="registerForm.controls['username'].hasError('pattern') && registerForm.controls['username'].touched">
-                    Enter valid username
+                  <p class="text-danger error mx-5" 
+                  *ngIf="registerForm.controls['username'].hasError('pattern') && registerForm.controls['username'].touched">
+                    Enter Valid Username
                   </p>
                 </div>
-                <div class="input-group flex-nowrap mt-2">
+                <div class="input-group flex-nowrap mt-4">
                   <span class="input-group-text" id="addon-wrapping">@</span>
                   <input type="text" formControlName="email"  class="form-control" placeholder="Email" aria-label="Email" aria-describedby="addon-wrapping">
-                  <p class="red-text" 
+                  <p class="text-danger error mx-5" 
                      *ngIf="registerForm.controls['email'].hasError('required') && registerForm.controls['email'].touched">
                     Email required
                   </p>
-                  <p class="red-text" 
+                  <p class="text-danger error mx-5" 
                      *ngIf="registerForm.controls['email'].hasError('pattern') && registerForm.controls['email'].touched">
                     Enter valid Email
                   </p>
                 </div>
-                <div class="input-group flex-nowrap mt-2">
+                <div class="input-group flex-nowrap mt-4">
                   <span class="input-group-text" id="addon-wrapping">**</span>
                   <input type="password" class="form-control" formControlName="password" placeholder="Password" aria-label="Password" aria-describedby="addon-wrapping">
-                  <p class="red-text" 
+                  <p class="text-danger error mx-5" 
                      *ngIf="registerForm.controls['password'].hasError('required') && registerForm.controls['password'].touched">
                     Password required
                   </p>
                 </div>
-                <div class="row mt-2">
+                <div class="row mt-4">
                   <div class="col-12 text-center">
                     <button class="btn btn-dark" type="button"   style="width: 150px;"
                             (click)="register(registerForm.value)"

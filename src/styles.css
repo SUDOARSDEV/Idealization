@@ -1,11 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
 .h-cal-100 {
- height: calc(100vh - 64px);
+ height: calc(100vh - 56px);
 }
 
 .error {
     position: fixed;
     font-size: 10px;
     margin-top: 2.5rem;
+}
+
+.white-text{
+    color: white;
 }

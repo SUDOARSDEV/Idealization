@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiRequestService } from "../../../services/api-request.service";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Globallist } from 'src/app/utilities/globallist';
 
 @Component({
   selector: 'app-verification',
@@ -10,20 +11,23 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class VerificationComponent implements OnInit {
 
   email : string = '';
+  verify_status:any ;
+  glist: Globallist = new Globallist();
 
   constructor( private apirequest: ApiRequestService, private route:ActivatedRoute , private router: Router) { }
 
   ngOnInit(): void {
     this.email = this.route.snapshot.params['emailId'];
-    console.log(this.email);    
+    this.glist.printInfo(this.email);    
   }
 
   update(){
     let data = { userId: this.email};
-    console.log(data);
+    this.glist.printInfo(data);
     
-    this.apirequest.postAPI('users/verify',data).subscribe(data => {
-      console.log(data);
+    this.apirequest.postAPI('users/verify',data).subscribe(res => {
+      console.log(res);
+      this.verify_status = res;
     });
   }
 

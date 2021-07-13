@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiRequestService } from 'src/app/services/api-request.service';
+import { Globallist } from 'src/app/utilities/globallist';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +10,7 @@ import { ApiRequestService } from 'src/app/services/api-request.service';
 export class HomeComponent implements OnInit {
 
   CourseList:any;
+  glist: Globallist = new Globallist();
 
   constructor(private apirequest: ApiRequestService) { }
 
@@ -18,12 +20,11 @@ export class HomeComponent implements OnInit {
 
   getCoursesList(){ 
     this.apirequest.getAPI('courses').subscribe(res => {
-        console.log(res);
+        this.glist.printInfo(res);
         this.CourseList = res;
-        console.log(this.CourseList.courses);
-        
+        this.glist.printInfo(this.CourseList.courses);        
     }, error => {
-     console.log(error);
+     this.glist.printInfo(error);
      this.CourseList = 'error';
     }); 
   }

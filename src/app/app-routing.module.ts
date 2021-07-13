@@ -24,9 +24,9 @@ const routes: Routes = [
   { path: 'forgetpassword/sendemail', component: SendEmailComponent},
   { path: 'forgetpassword/resetpassword/:emailId', component: ResetPasswordComponent },
   { path: 'signup', component: SignUpComponent },
-  { path:'user', component: DashboardComponent, canActivate: [AuthGuard], children: [
-    { path: 'dashboard', component: ProfileComponent },
-    { path: 'Testing', component: ProfileComponent },
+  { path:'user', canActivate: [AuthGuard], children: [
+    { path: 'dashboard', component: DashboardComponent },
+    { path: 'profile', component: ProfileComponent },
   ] },
   { path: '', redirectTo: '/user/dashboard', pathMatch: 'full'},
   { path: '**', redirectTo: '/user/dashboard'}
