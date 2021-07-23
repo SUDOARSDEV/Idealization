@@ -1,0 +1,125 @@
+<div class="row gx-0">
+    <div class="col-12 bg-dark">
+        <h4 class="text-center white-text mx-5">
+            <span class="text-success pointer" style="font-size:30px" data-bs-toggle="modal" data-bs-target="#createinstructor">+</span>
+            Instructors List
+        </h4>
+    </div>
+    <div class="col-12 d-flex justify-content-center" *ngIf="InstructorList != undefined">
+        <table class="table table-dark table-hover table-bordered" *ngIf="InstructorList.length !== 0">
+            <thead>
+              <tr>
+                <th scope="col" *ngFor="let item of ColumeName">{{item}}</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let fulldata of InstructorList; let i=index">
+                <th scope="row" *ngFor="let item of ColumeName">
+                  <span *ngIf="item === 'CourseId'">
+                    {{fulldata[item]['Name']}}
+                  </span>
+                  <span  *ngIf="item !== 'CourseId'">
+                    {{fulldata[item]}}
+                  </span>
+                </th>
+                <th>
+                    <button type="button" class="btn btn-outline-danger ms-1" (click)="Delete(fulldata)">Delete</button>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#updateIns" class="btn btn-outline-info ms-1" (click)="Update(fulldata)">Update</button>
+                </th>
+              </tr>
+            </tbody>
+        </table>
+        <div class="card border-info mt-5" style="max-width: 18rem;" *ngIf="InstructorList.length == 0">
+          <div class="card-header">Not Available</div>
+          <div class="card-body">
+            <h5 class="card-title">Add Instructors</h5>
+            <p class="card-text">Please Click to <b>+</b> icon</p>
+          </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="createinstructor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create Instructor</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form name="CreateInstructorForm" [formGroup]="CreateInstructorForm">
+              <div class="input-group flex-nowrap mb-4">
+                <span class="input-group-text" id="addon-wrapping">$..</span>
+                <input type="text" formControlName="Name"  class="form-control" placeholder="Instructor Name" aria-label="Name" aria-describedby="addon-wrapping">
+                <p class="text-danger error mx-5" 
+                *ngIf="CreateInstructorForm.controls['Name'].hasError('required') && CreateInstructorForm.controls['Name'].touched">
+                  Name Required
+                </p>
+                <p class="text-danger error mx-5" 
+                *ngIf="CreateInstructorForm.controls['Name'].hasError('pattern') && CreateInstructorForm.controls['Name'].touched">
+                  Enter Valid Name
+                </p>
+              </div>
+              <!-- <div class="input-group flex-nowrap mt-4">
+                <span class="input-group-text" id="addon-wrapping">@</span>
+                <input type="text" formControlName="CourseId"  class="form-control" placeholder="Course Name" aria-label="CourseId" aria-describedby="addon-wrapping">
+                <p class="text-danger error mx-5" 
+                   *ngIf="CreateInstructorForm.controls['CourseId'].hasError('required') && CreateInstructorForm.controls['CourseId'].touched">
+                  CouresId required
+                </p>
+                <p class="text-danger error mx-5" 
+                   *ngIf="CreateInstructorForm.controls['CourseId'].hasError('pattern') && CreateInstructorForm.controls['CourseId'].touched">
+                  Enter valid CouresId
+                </p>
+              </div> -->
+              <select formControlName="CourseId" class="form-select" aria-label="Default select example">
+                <option [ngValue]="null" disabled>Select Course</option>
+                <option value="1" *ngFor="let item of CourseList" [ngValue]="item._id">{{item.Name}}</option>
+            </select> 
+          </form>
+        </div>
+        <div class="modal-footer bg-dark">
+          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-outline-warning" (click)="Create(CreateInstructorForm.value)">Insert</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="modal fade" id="updateIns" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Instructor Course</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form name="CreateInstructorForm" [formGroup]="CreateInstructorForm">
+              <div class="input-group flex-nowrap mb-4">
+                  <span class="input-group-text" id="addon-wrapping">$..</span>
+                  <input type="text" placeholder={{instructorinfo?.Name}} formControlName="Name"  class="form-control" placeholder="Instructor Name" aria-label="Name" aria-describedby="addon-wrapping">
+                  <p class="text-danger error mx-5" 
+                  *ngIf="CreateInstructorForm.controls['Name'].hasError('required') && CreateInstructorForm.controls['Name'].touched">
+                      Name Required
+                  </p>
+                  <p class="text-danger error mx-5" 
+                  *ngIf="CreateInstructorForm.controls['Name'].hasError('pattern') && CreateInstructorForm.controls['Name'].touched">
+                      Enter Valid Name
+                  </p>
+              </div>
+              <select formControlName="CourseId" class="form-select" aria-label="Default select example">
+                  <option [ngValue]="null" disabled>Select Course</option>
+                  <option value="1" *ngFor="let item of CourseList" [ngValue]="item._id">{{item.Name}}</option>
+              </select> 
+          </form>
+      </div>
+      <div class="modal-footer bg-dark">
+          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-outline-warning" (click)="UpdateSend(CreateInstructorForm.value)">Update</button>
+      </div>
+      </div>
+  </div>
+  </div>

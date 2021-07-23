@@ -35,8 +35,22 @@ export class ApiRequestService {
         return response;
       })
     );
+  }
 
+  patchAPI(RouteName:any,Data:any){
+    return this.http.patch(`${this.BASE_URL}${RouteName}`, Data).pipe(
+      map(response => {        
+        return response;
+      })
+    );
+  }
 
+  DeleteAPI(RouteName:any,RouteId:any){
+    return this.http.delete(`${this.BASE_URL}${RouteName}/${RouteId}`).pipe(
+      map(response => {
+        return response;
+      })
+    );
   }
 
 }

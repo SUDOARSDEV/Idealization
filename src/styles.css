@@ -10,6 +10,14 @@
     margin-top: 2.5rem;
 }
 
-.white-text{
+.white-text {
     color: white;
+}
+
+.overlay-color {
+    background: #121314d1;
+}
+
+.pointer{
+    cursor: pointer;
 }

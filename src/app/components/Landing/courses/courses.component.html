@@ -1,0 +1,30 @@
+<div class="container" *ngIf="CourseList != undefined">
+    <div class="row mt-2 justify-content-start" *ngIf="CourseList.status == true">
+      
+        <div class="col-2 mt-3" *ngFor="let item of CourseList.courses">
+          <div class="card pointer" routerLink='/welcome/course/{{item._id}}'>
+            <img src={{item.courseImage}} class="card-img-top" alt="testing" height="200">
+            <div class="card-body">
+              <p class="card-text">
+                {{item.Name}}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="CourseList.status == true && CourseList.count == 0" class="col-md-4 offset-md-4 alert alert-success" role="alert">
+          No Courses Available Yet
+         </div>
+    </div>
+
+    <div class="row" *ngIf="CourseList.status == false">
+      <div class="col-md-4 offset-md-4 alert alert-danger mt-5" role="alert">
+        Ops Something Went Wrong !
+       </div>
+    </div>
+    
+    <div class="row" *ngIf="CourseList == 'error'">
+      <div class="col-md-4 offset-md-4 alert alert-danger mt-5" role="alert">
+       Ops Due to Connection Failed to Load data !
+      </div>
+    </div>    
+</div>

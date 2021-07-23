@@ -54,7 +54,7 @@ export class HeaderComponent implements OnInit {
     this.authenticationService.logout();
     this.userStatus = false;
     this.currentUser = null;
-    location.reload();
+    // location.reload();
     this.router.navigate(['/welcome']);
     // window.location.href = 'https://iponym.ai/';
     localStorage.clear();

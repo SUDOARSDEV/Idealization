@@ -1,0 +1,27 @@
+<div class="row gx-0 py-5">
+    <div class="col-4 offset-4 py-5">
+        <div class="card bg-dark text-white" *ngIf="coursedetail != undefined">
+            <img src={{coursedetail?.courseImage}} class="card-img" alt="...">
+            <div class="card-img-overlay overlay-color">
+              <h5 class="card-title">{{coursedetail?.Name}}</h5>
+              <hr>
+              <p class="card-text">
+                  Course Name : {{coursedetail?.Name}}
+              </p>
+              <p class="card-text">
+                Descriptiom : Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Laboriosam, ut soluta, saepe eius laborum porro asperiores temporibus 
+                blanditiis suscipit, quia corporis culpa atque quod. Autem veritatis 
+                recusandae mollitia enim dolore!
+              </p>
+              <p class="card-text">
+                  Course Price : {{coursedetail?.Price}}
+              </p>
+              
+              <p class="card-text text-center">
+                <button type="button" class="btn btn-outline-light">Lets Start !</button>
+              </p>
+            </div>
+        </div>
+    </div>
+</div>

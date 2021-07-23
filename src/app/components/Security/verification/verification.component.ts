@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiRequestService } from "../../../services/api-request.service";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { Globallist } from 'src/app/utilities/globallist';
 
 @Component({
@@ -14,7 +14,7 @@ export class VerificationComponent implements OnInit {
   verify_status:any ;
   glist: Globallist = new Globallist();
 
-  constructor( private apirequest: ApiRequestService, private route:ActivatedRoute , private router: Router) { }
+  constructor( private apirequest: ApiRequestService, private route:ActivatedRoute ) { }
 
   ngOnInit(): void {
     this.email = this.route.snapshot.params['emailId'];

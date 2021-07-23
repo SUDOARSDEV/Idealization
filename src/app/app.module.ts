@@ -25,6 +25,10 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { VerificationComponent } from './components/Security/verification/verification.component';
 import { SendEmailComponent } from './components/Security/send-email/send-email.component';
 import { ResetPasswordComponent } from './components/Security/reset-password/reset-password.component';
+import { CourseDetailComponent } from './components/Landing/course-detail/course-detail.component';
+import { CoursesComponent } from './components/Landing/courses/courses.component';
+import { CoursesDataComponent } from './components/Dashboarding/courses-data/courses-data.component';
+import { InstructorDataComponent } from './components/Dashboarding/instructor-data/instructor-data.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,11 @@ import { ResetPasswordComponent } from './components/Security/reset-password/res
     SignUpComponent,
     VerificationComponent,
     SendEmailComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    CourseDetailComponent,
+    CoursesComponent,
+    CoursesDataComponent,
+    InstructorDataComponent
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,9 @@
     <div class="col-2 bg-dark text-center h-cal-100">
         <img src="assets/images/user.svg" height="100" width="100" class="mt-5 rounded mx-auto d-block" alt="User Profile Image">
         <h5 class="white-text mt-1">{{userinfo?.username}}</h5>
-        <button type="button" class="my-5 btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Update Info</button>
+        <button type="button" class="my-1 btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Update Info</button>
+        <br>
+        <button type="button" class="my-1 btn btn-outline-danger btn-sm px-4" (click)="Delete()">Delete</button>
     </div>
     <div class="col-10 d-flex justify-content-center align-items-center">
         <div class="card text-dark bg-light mb-5">
